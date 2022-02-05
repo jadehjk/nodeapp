@@ -1,0 +1,21 @@
+.App {
+    width: 1100px;
+    height: 100px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.App-header {
+  display: flex;
+  justify-content: center;
+}
+
+.SearchButton {
+  margin-top: 15px;
+  height: 30px;
+  margin-left: 20px;
+}
