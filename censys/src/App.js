@@ -10,8 +10,8 @@ import { isIPv4 } from 'is-ip';
 
 const App = () => {
     const [ipAddress, setIpAddress] = useState("");
-    const [long, setLong] = useState(0);
-    const [lat, setLat] = useState(0);
+    const [long, setLong] = useState(null);
+    const [lat, setLat] = useState(null);
     const [inputValid, setInputValid] = useState(true);
     const [errorMsg, setErrorMsg] = useState("");
 
@@ -32,8 +32,8 @@ const App = () => {
             setErrorMsg("");
         } catch {
             setErrorMsg("There was an error fetching the location");
-            setLat(0);
-            setLong(0);
+            setLat(null);
+            setLong(null);
         }
     };
 
@@ -45,7 +45,7 @@ const App = () => {
         <div className="App">
             <header className="App-header">
                 <TextField
-                    error={!inputValid}
+                    error={errorMsg.length > 0}
                     label="Enter IP Address"
                     variant="standard"
                     onChange={handleIpAddressChange}
@@ -60,7 +60,7 @@ const App = () => {
                     >Search</Button>
                 </div>
             </header>
-            <LocationInfo lat={lat} long={long}/>
+            {errorMsg.length === 0 && <LocationInfo lat={lat} long={long}/>}
         </div>
     );
 }

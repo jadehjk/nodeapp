@@ -7,8 +7,8 @@ import {
 const LocationInfo = (props) => {
     return (
         <div className="LocationInfo">
-            {props.lat > 0 && <Typography variant="h4">Latitude: {props.lat}</Typography>}
-            {props.long > 0 && <Typography variant="h4">Longitude: {props.long}</Typography>}
+            {props.lat && <Typography variant="h4">Latitude: {props.lat}</Typography>}
+            {props.long && <Typography variant="h4">Longitude: {props.long}</Typography>}
         </div>
     )
 }
