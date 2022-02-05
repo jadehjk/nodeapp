@@ -4,18 +4,18 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import { getLocation } from "./getLocation.js";
+import { getLocation } from "./getLocation";
 import LocationInfo from './LocationInfo';
 import { isIPv4 } from 'is-ip';
 
-const App = () => {
-    const [ipAddress, setIpAddress] = useState("");
-    const [long, setLong] = useState(null);
-    const [lat, setLat] = useState(null);
+const App: React.FC = () => {
+    const [ipAddress, setIpAddress] = useState<string>("");
+    const [long, setLong] = useState<number | null>(null);
+    const [lat, setLat] = useState<number | null>(null);
     const [inputValid, setInputValid] = useState(true);
     const [errorMsg, setErrorMsg] = useState("");
 
-    useEffect(() => {
+    useEffect((): void => {
         if (ipAddress.length === 0) {
             setInputValid(true);
             setErrorMsg("");
@@ -24,7 +24,7 @@ const App = () => {
         }
     }, [ipAddress])
 
-    const retrieveInfo = async () => {
+    const retrieveInfo = async (): Promise<void> => {
         try {
             const result = await getLocation(ipAddress);
             setLong(result.longitude);
@@ -37,8 +37,8 @@ const App = () => {
         }
     };
 
-    const handleIpAddressChange = (event) => {
-        setIpAddress(event.target.value);
+    const handleIpAddressChange = (event: React.FormEvent) => {
+        setIpAddress((event.target as HTMLInputElement).value);
     };
 
     return (

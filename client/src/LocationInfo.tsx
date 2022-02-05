@@ -1,10 +1,9 @@
-import React from "react";
 import "./LocationInfo.css";
 import {
     Typography
  } from "@mui/material";
 
-const LocationInfo = (props) => {
+const LocationInfo = (props: Record<string, number|null>) => {
     return (
         <div className="LocationInfo">
             {props.lat && <Typography variant="h4">Latitude: {props.lat}</Typography>}
