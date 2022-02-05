@@ -9,11 +9,6 @@
     margin: auto;
 }
 
-.App-header {
-  display: flex;
-  justify-content: center;
-}
-
 .SearchButton {
   margin-top: 15px;
   height: 30px;

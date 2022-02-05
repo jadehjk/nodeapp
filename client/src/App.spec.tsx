@@ -1,21 +1,20 @@
 import React from 'react';
-import { shallow, mount, render } from "enzyme";
+import { shallow } from "enzyme";
 import App from './App';
-import { isIPv4 } from "is-ip";
-jest.mock("is-ip", () => {
-    isIPv4: jest.fn()
-}) 
+import SearchBox from './SearchBox';
+import LocationInfo from './LocationInfo';
+
 
 describe('App Component Tests', (): void => {
     const wrapper = shallow(<App />);
-    it('search button exists and has text Search', (): void => {
+    it('renders SearchBox component', (): void => {
         expect(
-            wrapper.find('.SearchButton').text()
-        ).toBe("Search")
-    })
-    it('search box exists and has text Enter IP Address', (): void => {
+            wrapper.containsMatchingElement(<SearchBox />)
+        ).toBe(true);
+    });
+    it('renders LocationInfo component', (): void => {
         expect(
-            wrapper.find('.SearchBox').children()
-        ).toBe("Enter IP Address")
+            wrapper.containsMatchingElement(<LocationInfo />)
+        ).toBe(true);
     })
-});
+})

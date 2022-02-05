@@ -18,5 +18,5 @@ Runs the app in the development mode.
 
 ## Automated testing
 
-This project uses jest for unit tests. To run the tests, run: 
-### `cd client && npm test`
+This project uses jest for unit tests. To run the front-end unit tests, run: 
+### `cd client && npm run test:unit`

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { City } from "../../types";
 
 export async function getLocation(ipAddress: string): Promise<Record<string, number>> {
     try {
