@@ -2,7 +2,7 @@ import React from "react";
 import "./LocationInfo.css";
 import {
     Typography
- } from "@mui/material/";
+ } from "@mui/material";
 
 const LocationInfo = (props) => {
     return (

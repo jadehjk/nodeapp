@@ -3,7 +3,7 @@ import "./App.css";
 import {
   TextField,
   Button,
-} from "@mui/material/";
+} from "@mui/material";
 import { getLocation } from "./getLocation.js";
 import LocationInfo from './LocationInfo';
 import { isIPv4 } from 'is-ip';
