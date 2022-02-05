@@ -1,10 +1,12 @@
-import { GeoLocationProducer } from "./GeoLocationProducer";
+import { GeoLocationProvider } from "./GeoLocationProvider";
 import { WebServiceClient } from "@maxmind/geoip2-node";
 
+import { City } from '../../types';
+
 /**
- * Uses the GeoLite web client to produce geo-locations for given ip addresses
+ * Uses the GeoLite web client to provide geo-locations for given ip addresses
  */
-export class GeoLiteLocationProducer implements GeoLocationProducer {
+export class GeoLiteLocationProvider implements GeoLocationProvider {
 
     private readonly geoLiteClient: WebServiceClient;
 
@@ -20,7 +22,7 @@ export class GeoLiteLocationProducer implements GeoLocationProducer {
         this.geoLiteClient = new WebServiceClient(accountId, license, {host: endpoint});
     }
     
-    async produceCity(ipAddress: string): Promise<any> {
+    async provideLocation(ipAddress: string): Promise<City> {
         try {
             return await this.geoLiteClient.city(ipAddress);
         } catch (error) { 

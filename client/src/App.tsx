@@ -5,10 +5,10 @@ import {
   Button,
 } from "@mui/material";
 import { getLocation } from "./getLocation";
-import LocationInfo from './LocationInfo';
-import { isIPv4 } from 'is-ip';
+import LocationInfo from "./LocationInfo";
+import { isIPv4 } from "is-ip";
 
-const App: React.FC = () => {
+const App = () => {
     const [ipAddress, setIpAddress] = useState<string>("");
     const [long, setLong] = useState<number | null>(null);
     const [lat, setLat] = useState<number | null>(null);
@@ -30,8 +30,8 @@ const App: React.FC = () => {
             setLong(result.longitude);
             setLat(result.latitude);
             setErrorMsg("");
-        } catch {
-            setErrorMsg("There was an error fetching the location");
+        } catch(err) {
+            setErrorMsg(`Failed to retrieve IP Address: ${ipAddress}`);
             setLat(null);
             setLong(null);
         }
@@ -44,13 +44,15 @@ const App: React.FC = () => {
     return (
         <div className="App">
             <header className="App-header">
-                <TextField
-                    error={errorMsg.length > 0}
-                    label="Enter IP Address"
-                    variant="standard"
-                    onChange={handleIpAddressChange}
-                    helperText={errorMsg}
-                />
+                <div className="SearchBox">
+                    <TextField
+                        error={errorMsg.length > 0}
+                        label="Enter IP Address"
+                        variant="standard"
+                        onChange={handleIpAddressChange}
+                        helperText={errorMsg}
+                    />
+                </div>
                 <div className="SearchButton">
                     <Button
                         size="small"
