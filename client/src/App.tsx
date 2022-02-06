@@ -9,6 +9,10 @@ const App = () => {
     const [lat, setLat] = useState<number | null>(null);
     const [errorMsg, setErrorMsg] = useState("");
 
+    const resetErrors = (): void => {
+        setErrorMsg("");
+    };
+
     const retrieveInfo = async (ipAddress: string): Promise<void> => {
         try {
             const result = await getLocation(ipAddress);
@@ -21,9 +25,10 @@ const App = () => {
             setLong(null);
         }
     };
+
     return (
         <div className="App">
-            <SearchBox onSearch={retrieveInfo} errorMsg={errorMsg}/>
+            <SearchBox onSearch={retrieveInfo} onResetErrorMessage={resetErrors} errorMsg={errorMsg}/>
             {errorMsg.length === 0 && <LocationInfo lat={lat} long={long}/>}
         </div>
     );

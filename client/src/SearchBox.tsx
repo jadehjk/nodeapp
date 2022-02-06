@@ -10,6 +10,7 @@ const SearchBox = (props: any) => {
     useEffect((): void => {
         if (ipAddress.length === 0) {
             setInputValid(true);
+            props.onResetErrorMessage();
         } else {
             setInputValid(isIPv4(ipAddress));
         }
@@ -25,18 +26,21 @@ const SearchBox = (props: any) => {
 
     return (
         <div className="SearchBox">
-            <TextField
-                error={props.errorMsg.length > 0}
-                label="Enter IP Address"
-                variant="standard"
-                onChange={handleIpAddressChange}
-                helperText={props.errorMsg}
-            />
+            <div className="TextBox">
+                <TextField
+                    error={props.errorMsg.length > 0}
+                    label="Enter IP Address"
+                    variant="standard"
+                    fullWidth
+                    onChange={handleIpAddressChange}
+                    helperText={props.errorMsg}
+                />
+            </div>
             <div className="SearchButton">
                 <Button
                     size="small"
                     variant="contained"
-                    disabled={!inputValid}
+                    disabled={!inputValid || !ipAddress.length}
                     onClick={retrieveInfo}
                 >Search</Button>
             </div>

@@ -4,7 +4,7 @@ import { locationProvider } from "./components";
 const app = express();
 
 app.get("/getLocation", async (req, res) => {
-    try{
+    try {
         const { ipAddress } = req.query;
         if (!ipAddress) {
             return res.status(500).json({ msg: 'IP Address Required' });

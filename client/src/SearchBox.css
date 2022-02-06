@@ -1,6 +1,14 @@
 .SearchBox {
-    align-items: center;
     display: flex;
     width: 30%;
     margin: 0 auto;
+}
+
+.TextBox {
+    max-width: 250px;
+    min-width: 250px;
+}
+
+.SearchButton {
+    display: block;
 }

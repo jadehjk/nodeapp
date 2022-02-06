@@ -1,8 +1,4 @@
-export interface LocationRecord {
+export interface Location {
     readonly latitude: number;
     readonly longitude: number;
-}
-
-export interface City {
-    readonly location?: LocationRecord;
 }
