@@ -12,7 +12,7 @@ app.get("/getLocation", async (req, res) => {
         const result = await locationProvider.provideLocation(ipAddress as string);
         res.send(result);
     } catch(err) {
-        res.send(err);
+        res.status(400).send(err);
     }
 })
 

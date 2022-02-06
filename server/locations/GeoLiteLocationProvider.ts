@@ -1,6 +1,6 @@
 import { WebServiceClient } from "@maxmind/geoip2-node";
 
-import { City } from '../../types';
+import { City, LocationRecord } from '../../types';
 
 /**
  * Uses the GeoLite web client to provide geo-locations for given ip addresses
@@ -17,13 +17,18 @@ export class GeoLiteLocationProvider {
         }
     */
 
-    constructor(accountId: string, license: string, endpoint: string) {
-        this.geoLiteClient = new WebServiceClient(accountId, license, {host: endpoint});
+    constructor(client: WebServiceClient) {
+        this.geoLiteClient = client;
     }
     
-    async provideLocation(ipAddress: string): Promise<City> {
+    async provideLocation(ipAddress: string): Promise<LocationRecord> {
         try {
-            return await this.geoLiteClient.city(ipAddress);
+            const city: City = await this.geoLiteClient.city(ipAddress);
+            const { latitude, longitude }: LocationRecord = city.location as LocationRecord;
+            return {
+                latitude,
+                longitude
+            }
         } catch (error) { 
             console.error(`Failed to retrieve city information for ${ipAddress}`, error);
             throw error;

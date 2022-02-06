@@ -7,7 +7,7 @@ export async function getLocation(ipAddress: string): Promise<Record<string, num
                 ipAddress
             }
         })
-        const { latitude, longitude }: { latitude: number, longitude: number } = result.data.location;
+        const { latitude, longitude }: { latitude: number, longitude: number } = result.data;
         return {
             latitude,
             longitude
