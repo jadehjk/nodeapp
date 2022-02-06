@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Button } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import { isIPv4 } from "is-ip";
 import "./SearchBox.css";
 
@@ -14,7 +15,7 @@ const SearchBox = (props: any) => {
         } else {
             setInputValid(isIPv4(ipAddress));
         }
-    }, [ipAddress]);
+    }, [ipAddress, props]);
 
     const retrieveInfo = (): void => {
         props.onSearch(ipAddress);
@@ -37,12 +38,13 @@ const SearchBox = (props: any) => {
                 />
             </div>
             <div className="SearchButton">
-                <Button
+                <LoadingButton
                     size="small"
                     variant="contained"
+                    loading={props.loading}
                     disabled={!inputValid || !ipAddress.length}
                     onClick={retrieveInfo}
-                >Search</Button>
+                >Search</LoadingButton>
             </div>
         </div>
     )

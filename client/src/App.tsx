@@ -8,6 +8,7 @@ const App = () => {
     const [long, setLong] = useState<number | null>(null);
     const [lat, setLat] = useState<number | null>(null);
     const [errorMsg, setErrorMsg] = useState("");
+    const [loading, setLoading] = useState<boolean>(false);
 
     const resetErrors = (): void => {
         setErrorMsg("");
@@ -15,20 +16,28 @@ const App = () => {
 
     const retrieveInfo = async (ipAddress: string): Promise<void> => {
         try {
+            setLoading(true);
             const result = await getLocation(ipAddress);
             setLong(result.longitude);
             setLat(result.latitude);
+            setLoading(false);
             setErrorMsg("");
         } catch(err) {
             setErrorMsg(`Failed to retrieve IP Address: ${ipAddress}`);
             setLat(null);
             setLong(null);
+            setLoading(false);
         }
     };
 
     return (
         <div className="App">
-            <SearchBox onSearch={retrieveInfo} onResetErrorMessage={resetErrors} errorMsg={errorMsg}/>
+            <SearchBox
+                onSearch={retrieveInfo}
+                onResetErrorMessage={resetErrors}
+                errorMsg={errorMsg}
+                loading={loading}
+            />
             {errorMsg.length === 0 && <LocationInfo lat={lat} long={long}/>}
         </div>
     );
