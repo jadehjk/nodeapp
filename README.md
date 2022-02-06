@@ -1,5 +1,11 @@
 # Getting Started
 
+## Prerequisites
+
+You need a working version of docker-compose.
+To see if you have docker-composed installed, run `docker-compose --version`.
+If you don't have docker-compose installed, follow the instructions here: https://docs.docker.com/compose/install/
+
 ## Running the app
 
 In the root project directory, run:

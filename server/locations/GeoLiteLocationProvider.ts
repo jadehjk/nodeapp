@@ -1,4 +1,4 @@
-import { City, Country, LocationRecord, WebServiceClient } from "@maxmind/geoip2-node";
+import { City, Country, WebServiceClient } from "@maxmind/geoip2-node";
 
 import { Location } from '../../types';
 
@@ -16,6 +16,7 @@ export class GeoLiteLocationProvider {
     async provideLocation(ipAddress: string): Promise<Location> {
         try {
             const city: City = await this.geoLiteClient.city(ipAddress);
+            const test: Country = await this.geoLiteClient.country(ipAddress);
             if (city.location) { // the Location field is optional in the City model
                 return {
                     latitude: city.location.latitude,
