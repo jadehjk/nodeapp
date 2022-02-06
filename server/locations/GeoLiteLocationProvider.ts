@@ -1,4 +1,3 @@
-import { GeoLocationProvider } from "./GeoLocationProvider";
 import { WebServiceClient } from "@maxmind/geoip2-node";
 
 import { City } from '../../types';
@@ -6,7 +5,7 @@ import { City } from '../../types';
 /**
  * Uses the GeoLite web client to provide geo-locations for given ip addresses
  */
-export class GeoLiteLocationProvider implements GeoLocationProvider {
+export class GeoLiteLocationProvider {
 
     private readonly geoLiteClient: WebServiceClient;
 
