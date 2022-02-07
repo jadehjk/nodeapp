@@ -3,7 +3,7 @@ import {
     Typography
  } from "@mui/material";
 
-const LocationInfo = (props: Record<string, number|null>) => {
+const LocationInfo: React.FC<{lat: number|null, long: number|null}> = (props) => {
     return (
         <div className="LocationInfo">
             {props.lat && <Typography variant="h4">Latitude: {props.lat}</Typography>}

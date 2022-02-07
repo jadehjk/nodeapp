@@ -4,7 +4,9 @@ import { LoadingButton } from "@mui/lab";
 import { isIPv4 } from "is-ip";
 import "./SearchBox.css";
 
-const SearchBox = (props: any) => {
+const SearchBox: React.FC<{
+    onResetErrorMessage: () => void, onSearch: (ipAddress: string) => void, errorMsg: string, loading: boolean
+}> = (props) => {
     const [ipAddress, setIpAddress] = useState<string>("");
     const [inputValid, setInputValid] = useState(true);
 

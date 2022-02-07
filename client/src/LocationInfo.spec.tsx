@@ -10,13 +10,13 @@ describe('LocationInfo Component Tests', (): void => {
         ).toEqual("<div class=\"LocationInfo\"></div>");
     });
     it('displays latitude info', (): void => {
-        const wrapper = shallow(<LocationInfo lat={0.01}/>);
+        const wrapper = shallow(<LocationInfo lat={0.01} long={null}/>);
         expect(
             wrapper.text()
         ).toEqual("Latitude: 0.01")
     });
     it('displays longitude info', (): void => {
-        const wrapper = shallow(<LocationInfo long={0.02}/>);
+        const wrapper = shallow(<LocationInfo lat={null} long={0.02}/>);
         expect(
             wrapper.text()
         ).toEqual("Longitude: 0.02")
