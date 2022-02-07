@@ -8,15 +8,15 @@ You can see your version of docker-compose by running `docker-compose --version`
 
 To install docker-compose, follow the download instructions here: https://docs.docker.com/compose/install/
 
+You can see your version of nodejs by running `node -v`.
+
 To install nodejs, follow the download instructions here: https://nodejs.org/en/download/
 
 ## Running the app
 
-In the root project directory, run:
+In the root project directory, run: `docker-compose -f docker-compose.yml up`
 
-### `docker-compose -f docker-compose.yml up`
-
-This runs the app in development mode.
+This runs the app in development mode. Changes should automatically reload the app.
 
 ## Manually testing the app
 
