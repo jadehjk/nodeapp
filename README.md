@@ -2,11 +2,13 @@
 
 ## Prerequisites
 
-You need a working version of docker-compose.
+You need a working version of docker-compose and nodejs.
 
 You can see your version of docker-compose by running `docker-compose --version`.
 
 To install docker-compose, follow the download instructions here: https://docs.docker.com/compose/install/
+
+To install nodejs, follow the download instructions here: https://nodejs.org/en/download/
 
 ## Running the app
 
