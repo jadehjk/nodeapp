@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { TextField } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
-import { isIPv4 } from "is-ip";
-import "./SearchBox.css";
+import React, { useState, useEffect } from 'react';
+import { TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import { isIPv4 } from 'is-ip';
+import './SearchBox.css';
 
 const SearchBox: React.FC<{
     onResetErrorMessage: () => void, onSearch: (ipAddress: string) => void, errorMsg: string, loading: boolean
 }> = (props) => {
-    const [ipAddress, setIpAddress] = useState<string>("");
+    const [ipAddress, setIpAddress] = useState<string>('');
     const [inputValid, setInputValid] = useState(true);
 
     useEffect((): void => {
@@ -28,21 +28,21 @@ const SearchBox: React.FC<{
     };
 
     return (
-        <div className="SearchBox">
-            <div className="TextBox">
+        <div className='SearchBox'>
+            <div className='TextBox'>
                 <TextField
                     error={props.errorMsg.length > 0}
-                    label="Enter IP Address"
-                    variant="standard"
+                    label='Enter IP Address'
+                    variant='standard'
                     fullWidth
                     onChange={handleIpAddressChange}
                     helperText={props.errorMsg}
                 />
             </div>
-            <div className="SearchButton">
+            <div className='SearchButton'>
                 <LoadingButton
-                    size="small"
-                    variant="contained"
+                    size='small'
+                    variant='contained'
                     loading={props.loading}
                     disabled={!inputValid || !ipAddress.length}
                     onClick={retrieveInfo}

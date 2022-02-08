@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import "./App.css";
-import { getLocation } from "./getLocation";
-import LocationInfo from "./LocationInfo";
-import SearchBox from "./SearchBox";
+import React, { useState } from 'react';
+import './App.css';
+import { getLocation } from './getLocation';
+import LocationInfo from './LocationInfo';
+import SearchBox from './SearchBox';
 
 const App = () => {
     const [long, setLong] = useState<number | null>(null);
     const [lat, setLat] = useState<number | null>(null);
-    const [errorMsg, setErrorMsg] = useState("");
+    const [errorMsg, setErrorMsg] = useState('');
     const [loading, setLoading] = useState<boolean>(false);
 
     const resetErrors = (): void => {
-        setErrorMsg("");
+        setErrorMsg('');
     };
 
     const retrieveInfo = async (ipAddress: string): Promise<void> => {
@@ -21,7 +21,7 @@ const App = () => {
             setLong(result.longitude);
             setLat(result.latitude);
             setLoading(false);
-            setErrorMsg("");
+            setErrorMsg('');
         } catch(err: any) {
             setErrorMsg(err.response.data.message);
             setLat(null);
@@ -31,7 +31,7 @@ const App = () => {
     };
 
     return (
-        <div className="App">
+        <div className='App'>
             <SearchBox
                 onSearch={retrieveInfo}
                 onResetErrorMessage={resetErrors}

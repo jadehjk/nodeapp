@@ -1,12 +1,12 @@
-import { City, WebServiceClient } from "@maxmind/geoip2-node";
+import { City, WebServiceClient } from '@maxmind/geoip2-node';
 
-import { Location } from '../../types';
+import { Location, NodeAppError, InvalidRequestError } from '../../types';
 
 /**
  * Uses the GeoLite web client to provide geo-locations for given ip addresses
  */
 export class GeoLiteLocationProvider {
-
+    public static readonly INVALID_IP_ADDRESS = 'IP_ADDRESS_RESERVED';
     private readonly geoLiteClient: WebServiceClient;
 
     constructor(client: WebServiceClient) {
@@ -23,21 +23,15 @@ export class GeoLiteLocationProvider {
                 }
             }
             else {
-                throw new Error("Location was undefined");
+                throw new Error('Location was undefined');
             }
         } catch (error) {
             const { code, message } = error as NodeJS.ErrnoException;
-            if (code === "IP_ADDRESS_RESERVED") {
-                const msg = `${ipAddress} is a reserved IP address`;
-                let newError = new Error(msg) as NodeJS.ErrnoException;
-                newError.code = "IP_ADDRESS_RESERVED"
-                throw newError;
+            if (code === GeoLiteLocationProvider.INVALID_IP_ADDRESS) {
+                throw new InvalidRequestError(`${ipAddress} is a reserved IP address`);
             } else {
-                const msg = `Failed to retrieve city information for ${ipAddress}: ${message}`;
-                throw new Error(msg);
+                throw new NodeAppError(`Failed to retrieve city information for ${ipAddress}: ${message}`);
             }
-            
-        }    
+        }
     }
-
 }

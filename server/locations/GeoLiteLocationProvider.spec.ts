@@ -1,11 +1,12 @@
-import { GeoLiteLocationProvider } from "../locations/GeoLiteLocationProvider";
-import { City, WebServiceClient } from "@maxmind/geoip2-node";
+import { GeoLiteLocationProvider } from '../locations/GeoLiteLocationProvider';
+import { City, WebServiceClient } from '@maxmind/geoip2-node';
+import { InvalidRequestError, NodeAppError } from '../../types';
 
-const mockValidIpAddress = "142.1.1.1";
-const mockInvalidIpAddress = "invalid ip address";
-const mockUnknownIpAddress = "location unknown ip address";
+const mockValidIpAddress = '142.1.1.1';
+const mockInvalidIpAddress = 'invalid ip address';
+const mockUnknownIpAddress = 'location unknown ip address';
 
-jest.mock("@maxmind/geoip2-node", () => {
+jest.mock('@maxmind/geoip2-node', () => {
     return {
         WebServiceClient: jest.fn().mockImplementation(() => {
             return {
@@ -21,7 +22,12 @@ jest.mock("@maxmind/geoip2-node", () => {
                     else if (ipAddress === mockUnknownIpAddress) {
                         return {} as unknown as City;
                     } else {
-                        throw new Error("Error");
+                        let newError: NodeJS.ErrnoException = {
+                            name: 'error',
+                            message: 'Error',
+                            code: GeoLiteLocationProvider.INVALID_IP_ADDRESS
+                        }
+                        throw newError;
                     }
                 }
             }
@@ -41,16 +47,16 @@ describe('Mock Implementation of GeoLiteLocation Provider', (): void => {
             longitude: 0.02
         })
     })
-    it('returns error message for an invalid ip address', async (): Promise<void> => {
+    it('returns invalid request error message for an invalid ip address', async (): Promise<void> => {
         const error: Error = await provider.provideLocation(mockInvalidIpAddress).catch(e => e);
         expect(
-            error.message
-        ).toEqual(`Failed to retrieve city information for ${mockInvalidIpAddress}: Error`)
+            error.name
+        ).toEqual(InvalidRequestError.name)
     })
     it('returns error message for malformed response', async (): Promise<void> => {
         const error: Error = await provider.provideLocation(mockUnknownIpAddress).catch(e => e);
         expect(
-            error.message
-        ).toEqual(`Failed to retrieve city information for ${mockUnknownIpAddress}: Location was undefined`)
+            error.name
+        ).toEqual(NodeAppError.name)
     })
 })

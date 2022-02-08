@@ -1,9 +1,9 @@
-import express from "express";
-import locationRoute from "./locationRoute";
+import express from 'express';
+import locationRoute from './locationRoute';
 
 const app = express();
 
-app.use("/location", locationRoute);
+app.use('/location', locationRoute);
 
 const port = process.env.PORT || 8080;
 app.listen(port);

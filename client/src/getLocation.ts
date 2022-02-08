@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
 export async function getLocation(ipAddress: string): Promise<Record<string, number>> {
     try {
-        const result = await axios.get("/location", {
+        const result = await axios.get('/location', {
             params: {
                 ipAddress
             }
