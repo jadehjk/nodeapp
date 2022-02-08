@@ -22,8 +22,8 @@ const App = () => {
             setLat(result.latitude);
             setLoading(false);
             setErrorMsg("");
-        } catch(err) {
-            setErrorMsg(`Failed to retrieve IP Address: ${ipAddress}`);
+        } catch(err: any) {
+            setErrorMsg(err.response.data.message);
             setLat(null);
             setLong(null);
             setLoading(false);

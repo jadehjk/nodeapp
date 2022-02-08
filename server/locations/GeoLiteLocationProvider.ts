@@ -25,10 +25,18 @@ export class GeoLiteLocationProvider {
             else {
                 throw new Error("Location was undefined");
             }
-        } catch (error) { 
-            const { message } = error as Error; 
-            const msg = `Failed to retrieve city information for ${ipAddress}: ${message}`;
-            throw new Error(msg);
+        } catch (error) {
+            const { code, message } = error as NodeJS.ErrnoException;
+            if (code === "IP_ADDRESS_RESERVED") {
+                const msg = `${ipAddress} is a reserved IP address`;
+                let newError = new Error(msg) as NodeJS.ErrnoException;
+                newError.code = "IP_ADDRESS_RESERVED"
+                throw newError;
+            } else {
+                const msg = `Failed to retrieve city information for ${ipAddress}: ${message}`;
+                throw new Error(msg);
+            }
+            
         }    
     }
 

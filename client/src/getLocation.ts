@@ -12,7 +12,7 @@ export async function getLocation(ipAddress: string): Promise<Record<string, num
             latitude,
             longitude
         }
-    } catch(err) {
-        throw err;
+    } catch(error) {
+        throw error;
     }
 }
