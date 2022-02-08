@@ -27,6 +27,12 @@ const SearchBox: React.FC<{
         setIpAddress((event.target as HTMLInputElement).value);
     };
 
+    const handleEnter = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter' && inputValid && ipAddress.length > 0) {
+            retrieveInfo();
+        }
+    };
+
     return (
         <div className='SearchBox'>
             <div className='TextBox'>
@@ -36,6 +42,7 @@ const SearchBox: React.FC<{
                     variant='standard'
                     fullWidth
                     onChange={handleIpAddressChange}
+                    onKeyPress={handleEnter}
                     helperText={props.errorMsg}
                 />
             </div>
