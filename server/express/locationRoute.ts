@@ -14,7 +14,8 @@ locationRoute.get('/', async (req, res) => {
         res.send(result);
     } catch(error) {
         const { httpStatus, message  } = error as NodeAppError;
-        return res.status(httpStatus).json({ message });
+        const status = httpStatus ? httpStatus : 500;
+        return res.status(status).json({ message });
     }
 })
 
