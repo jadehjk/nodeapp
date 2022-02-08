@@ -7,7 +7,7 @@ describe('LocationInfo Component Tests', (): void => {
         const wrapper = shallow(<LocationInfo lat={null} long={null}/>);
         expect(
             wrapper.html()
-        ).toEqual('<div class=\'LocationInfo\'></div>');
+        ).toEqual('<div class=\"LocationInfo\"></div>');
     });
     it('displays latitude info', (): void => {
         const wrapper = shallow(<LocationInfo lat={0.01} long={null}/>);

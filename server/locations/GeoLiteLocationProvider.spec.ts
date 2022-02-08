@@ -52,11 +52,17 @@ describe('Mock Implementation of GeoLiteLocation Provider', (): void => {
         expect(
             error.name
         ).toEqual(InvalidRequestError.name)
+        expect(
+            error.message
+        ).toEqual('invalid ip address is a reserved IP address');
     })
     it('returns error message for malformed response', async (): Promise<void> => {
         const error: Error = await provider.provideLocation(mockUnknownIpAddress).catch(e => e);
         expect(
             error.name
         ).toEqual(NodeAppError.name)
+        expect(
+            error.message
+        ).toEqual('Failed to retrieve city information for location unknown ip address: Location was undefined');
     })
 })

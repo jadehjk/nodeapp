@@ -3,7 +3,7 @@ export interface Location {
     readonly longitude: number;
 }
 
-export class NodeAppError extends Error{
+export class NodeAppError extends Error {
     public httpStatus: number;
 
     public constructor (message:string) {
@@ -16,7 +16,7 @@ export class NodeAppError extends Error{
 export class InvalidRequestError extends NodeAppError {
     public constructor (message:string) {
         super(message);
-        this.name = 'InvalidRequestError'
+        this.name = 'InvalidRequestError';
         this.httpStatus = 400;
     }
 }
